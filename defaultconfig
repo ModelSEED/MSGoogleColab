@@ -1,0 +1,9 @@
+[DevEnv]
+codebase = /Environment/
+syspaths = chenry_utility_module/lib;KBBaseModules;ModelSEEDpy;cb_annotation_ontology_api/lib;cobrakbase;KB-ModelSEEDReconstruction/lib;MergeMetabolicAnnotations/lib;virtualenv/lib/python3.10/site-packages/
+data = /content/drive/MyDrive/ModelSEEDpy-Collab/data/
+callback_path = /content/drive/MyDrive/ModelSEEDpy-Collab/
+module_directory = /content/drive/MyDrive/ModelSEEDpy-Collab/
+appdev_sdk_home = appdev_kb_sdk
+prod_sdk_home = kb_sdk
+devenv = 1
