@@ -9,7 +9,7 @@ class MSColabUtils:
       drive.mount('/content/drive')
       self.SetupColabHome()
       self.SetupEnv()
-      self.LinkColabHome(True)
+      self.LinkColabHome()
 
     def SetupEnv(self,overwrite=False):
       if exists('/Environment') and overwrite:
