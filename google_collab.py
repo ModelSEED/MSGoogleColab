@@ -38,7 +38,7 @@ class MSColabUtils:
       if not exists('/content/drive/MyDrive/MyMSColab'):
         os.makedirs('/content/drive/MyDrive/MyMSColab')
       if not exists('/content/drive/MyDrive/MyMSColab/MSGoogleColab'):
-        result = subprocess.run("cd /content/drive/MyDrive/MyMSColab;git clone https://github.com/ModelSEED/MSGoogleColab.git", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
+        os.system("cd /content/drive/MyDrive/MyMSColab;git clone https://github.com/ModelSEED/MSGoogleColab.git")
       if not exists('/content/drive/MyDrive/MyMSColab/config'):
         shutil.copyfile('/content/drive/MyDrive/MyMSColab/MSGoogleColab/defaultconfig','/content/drive/MyDrive/MyMSColab/config')
     
