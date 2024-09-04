@@ -3,7 +3,6 @@ from os.path import exists
 from google.colab import drive
 import shutil
 import tarfile
-import subprocess
 
 class MSColabUtils:
     def __init__(self):
