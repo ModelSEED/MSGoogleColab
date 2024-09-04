@@ -1,19 +1,29 @@
 import os
 from os.path import exists
+from google.colab import drive
 import shutil
 import tarfile
+import subprocess
 
 class MSColabUtils:
     def __init__(self):
-      self.DownloadSetupEnv()
+      drive.mount('/content/drive')
       self.SetupColabHome()
+      self.SetupEnv()
       self.LinkColabHome()
 
-    def DownloadSetupEnv(self,overwrite=False):
+    def SetupEnv(self,overwrite=False):
       if exists('/Environment') and overwrite:
         shutil.rmtree('/Environment')
       if not exists('/Environment'):
-        with tarfile.open("/content/drive/MyDrive/ModelSEEDpy-Collab/Env.tgz", 'r:gz') as tar:
+        with tarfile.open("/content/drive/MyDrive/MyMSCollab/MSGoogleColab/Env.tgz", 'r:gz') as tar:
+          tar.extractall(path="/")
+
+    def SetupData(self,overwrite=False):
+      if exists('/Data') and overwrite:
+        shutil.rmtree('/Data')
+      if not exists('/Data'):
+        with tarfile.open("/content/drive/MyDrive/MyMSCollab/MSGoogleColab/data.tgz", 'r:gz') as tar:
           tar.extractall(path="/")
     
     def SetToken(self,token):
@@ -27,8 +37,10 @@ class MSColabUtils:
         shutil.rmtree('/content/drive/MyDrive/MyMSCollab')
       if not exists('/content/drive/MyDrive/MyMSCollab'):
         os.makedirs('/content/drive/MyDrive/MyMSCollab')
+      if not exists('/content/drive/MyDrive/MyMSCollab/MSGoogleColab'):
+        result = subprocess.run("cd /content/drive/MyDrive/MyMSCollab;git clone https://github.com/ModelSEED/MSGoogleColab.git", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
       if not exists('/content/drive/MyDrive/MyMSCollab/config'):
-        shutil.copyfile('/content/drive/MyDrive/ModelSEEDpy-Collab/defaultconfig','/content/drive/MyDrive/MyMSCollab/config')
+        shutil.copyfile('/content/drive/MyDrive/MyMSCollab/MSGoogleColab/defaultconfig','/content/drive/MyDrive/MyMSCollab/config')
     
     def LinkColabHome(self,overwrite=False):
       if exists("/root/.kbase") and overwrite:
@@ -42,7 +54,7 @@ class MSColabUtils:
 
     def UpdateSourceEnvironment(self):
       if exists('/Environment'):
-         with tarfile.open("/content/drive/MyDrive/ModelSEEDpy-Collab/NewEnv.tgz", "w:gz") as tar:
+         with tarfile.open("/content/drive/MyDrive/MyMSCollab/MSGoogleColab/Env.tgz", "w:gz") as tar:
             tar.add('/Environment', arcname=os.path.basename('/Environment'))
 
 gc_util = MSColabUtils()
